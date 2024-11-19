@@ -1,0 +1,134 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.navbar {
+    margin:3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-items {
+    display: inline-flex;
+    gap: 20px;
+
+}
+
+.nav-items a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 10px;
+    border-radius: 5px;
+
+
+}
+
+.nav-items a:hover {
+    background-color: #e9ecef;
+}
+
+.container{
+    display:flex;
+    justify-content: space-around;
+    /* border: 1px solid rgb(237, 150, 150); */
+    height:40vh;
+    width:70%;
+    padding: 5px 5px;
+    border-bottom: 1px solid rgb(151, 136, 136);
+}
+
+.firstbox, .secondbox{
+    
+    /* background-color: aqua; */
+    width:40%;
+    padding:10px;
+    border-radius: 5px;
+
+}
+
+#boxheading{
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 20px;
+    font-family: sans-serif;
+
+    
+}
+.firstbox-content{
+    display:flex;
+    justify-content: left;
+    align-items: center;
+    margin-top: 20px;
+}
+#profile-img{
+    height:100px;
+    width:100px
+}
+.secondbox-content{
+    display:flex;
+    
+    justify-content: space-around;
+    padding:10px
+
+}
+#box{
+    
+    border:2px solid red;
+    height:150px;
+    width:150px;
+    border-radius: 8px;
+    background-color: rgba(241, 249, 246, 0.916);
+    
+    /* border: 1px solid rgb(243, 210, 210); */
+}
+#box img,h4,h6{
+    align-items: center;
+    padding:3px;
+    margin: 2px auto;
+    justify-content: space-between;
+    text-align: center;
+
+}
+#box img{
+    margin-left: 45px;
+}
+.second-container{
+    display: flex;
+    justify-content: space-around;
+    margin:20px auto;
+    /* border:1px solid #e9ecef; */
+    width:70%
+
+    
+}
+#my-donations{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px
+}
+
+
+
+
+
+
+
+
+
