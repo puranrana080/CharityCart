@@ -6,6 +6,7 @@ const authenticate=async(req,res,next)=>{
     try{
         const token=req.header('Authorization')
         console.log("This is token",token)
+        console.log("Authorizing the user")
 
         const user = jwt.verify(token,process.env.TOKEN_SECRET)
         console.log(user.userId)

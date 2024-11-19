@@ -20,6 +20,14 @@ const User = sequelize.define('users', {
     password: {
         type: Sequelize.STRING,
         allowNull: false,
+    },
+    total_donation:{
+        type:Sequelize.INTEGER,
+        defaultValue:0
+    },
+    campaignSupported:{
+        type:Sequelize.INTEGER,
+        defaultValue:0
     }
 })
 module.exports = User

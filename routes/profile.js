@@ -5,5 +5,7 @@ const userAuthentication = require('../middleware/auth')
 
 router.get('/profile',profileController.getUserProfilePage)
 
+router.get('/profile/userDetails',userAuthentication.authenticate,profileController.getUserProfileDetails)
+
 
 module.exports = router

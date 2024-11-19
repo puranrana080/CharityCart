@@ -20,11 +20,11 @@
             </a>
             <div class="nav-items">
                 <a href="../views/profile.html">Home</a>
-                <a href="/profile">Start A Campaign</a>
+                <a href="">Start A Campaign</a>
                 <a href="self.html">Explore Campaigns</a>
             </div>
         </div>
-        <div id="welcome">Welcome Puran Singh Rana</div>
+        <div id="welcome"></div>
     </div>
     <!-- container -->
     <div class="container">
@@ -36,9 +36,9 @@
                 <img id="profile-img" src="../images/test-user.png" alt="user-logo">
 
                 <div>
-                    <h5>PURAN SINGH RANA <a href=""> <img src="../images//edit.svg" alt=""></a></h5>
-                    <p>puransinghrana080@gmail.com</p>
-                    <p>9917965657</p>
+                    <h5> <a href=""><img src="../images/edit.svg" alt=""></a></h5>
+                    <p id="useremail"></p>
+                    <p id="phonnumber"></p>
                 </div>
 
 
@@ -50,12 +50,12 @@
             <div class="secondbox-content">
                 <div id="box">
                     <img src="../images/donation.png" alt="donation">
-                    <h4>$0</h4>
+                    <h4 id="donated"></h4>
                     <h6>Total Donations</h6>
                 </div>
                 <div id="box"> 
                     <img src="../images/support.png" alt="support">
-                    <h4>0</h4>
+                    <h4 id="joined"></h4>
                     <h6>campaigns supported</h6>
                 </div>
 
@@ -74,8 +74,11 @@
     </div>
 
 
-    <script src="profile.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.7/axios.min.js"
+    integrity="sha512-DdX/YwF5e41Ok+AI81HI8f5/5UsoxCVT9GKYZRIzpLxb8Twz4ZwPPX+jQMwMhNQ9b5+zDEefc+dcvQoPWGNZ3g=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="/views/profile.js"></script>
+
 
 </body>
 
