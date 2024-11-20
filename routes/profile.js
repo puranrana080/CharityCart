@@ -7,5 +7,7 @@ router.get('/profile',profileController.getUserProfilePage)
 
 router.get('/profile/userDetails',userAuthentication.authenticate,profileController.getUserProfileDetails)
 
+router.get('/profile/editProfile',)
+
 
 module.exports = router

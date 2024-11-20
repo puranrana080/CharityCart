@@ -4,7 +4,11 @@ const userAuthentication = require('../middleware/auth')
 const charityController =require('../controller/charity')
 
 // router.get('/charity',charityController.getCharityForm)
-console.log("Reached in router")
+
 router.post('/charity/create',userAuthentication.authenticate,charityController.postCreateCharity)
+
+router.get('/cherities',userAuthentication.authenticate,charityController.getAllCampaigns)
+
+router.get('/charity/my-charity',userAuthentication.authenticate,charityController.getMyCampaigns)
 
 module.exports= router  

@@ -8,7 +8,7 @@ function getUserProfileDetails(){
         const user=response.data.user
 
         document.getElementById('welcome').textContent=`Welcome ${user.userName}`
-        document.querySelector('.firstbox-content h5').innerHTML=`${user.userName} <a id="editProfile" href=""><img src="../images/edit.svg" alt=""></a>`
+        document.querySelector('.firstbox-content h5').innerHTML=`${user.userName} <a id="editProfile" href="../views/editprofile.html"><img src="../images/edit.svg" alt=""></a>`
         document.getElementById('useremail').textContent=`${user.userEmail}`
         document.getElementById('phonnumber').textContent=`${user.userPhone}`
 
@@ -33,5 +33,8 @@ window.addEventListener("DOMContentLoaded",async()=>{
     getUserProfileDetails()
 
 })
+
+
+
 
 

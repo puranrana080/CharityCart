@@ -26,3 +26,29 @@ exports.postCreateCharity=async(req,res,next)=>{
     }
 
 }
+
+exports.getAllCampaigns=async(req,res,next)=>{
+    try{
+        const cherities=await Charity.findAll({where:{isApproved:true}})
+console.log("server charities",cherities)
+res.status(200).json({message:"received all ",cherities})
+    }
+    catch(error){
+        console.log("server",error)
+        res.status(500).json({message:"error",error})
+    }
+}
+
+
+exports.getMyCampaigns=async(req,res,next)=>{
+    try{
+        const myCharity=await Charity.findAll({where:{userId:req.user.id}})
+        console.log("mycharity server",myCharity)
+res.status(200).json({message:"Got mycharity",myCharity})
+    }
+    catch(error){
+        console.log("server",error)
+        res.status(500).json({message:"server error",error})
+    }
+
+}
