@@ -21,3 +21,29 @@ exports.getUserProfileDetails=async(req,res,next)=>{
         res.status(500).json({message:"Unabel to get user details in server "})
     }
 }
+
+exports.postUpdateProfile=async(req,res,next)=>{
+    const {name,phone} =req.body
+
+    try{
+        const userId=req.user.id
+
+        const result=await User.update({
+            userName:name,
+            userPhone:phone
+        },{where:{id:userId}})
+        
+
+        res.status(200).json({ message: "Profile updated successfully" });
+
+
+    }
+    catch(error){
+        console.error("Error updating profile:", error);
+        res.status(500).json({ message: "error while updating the profile", error })
+
+    }
+
+
+
+}
