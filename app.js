@@ -7,6 +7,7 @@ const sequelize=require('./util/database')
 
 
 const User=require('./model/user')
+const Charity = require('./model/charity')
 
 
 // Middleware to parse incoming JSON requests and URL-encoded form data
@@ -18,7 +19,7 @@ app.use(cors({
 
 const userRoutes=require('./routes/user')
 const profileRoutes=require('./routes/profile')
-
+const charityRoutes=require('./routes/charity')
 
 //server static files from public folder
 app.use(express.static(path.join(__dirname,'public')))
@@ -26,7 +27,11 @@ app.use(express.static(path.join(__dirname,'public')))
 
 app.use(userRoutes)
 app.use(profileRoutes)
+app.use(charityRoutes)
 
+
+User.hasMany(Charity)
+Charity.belongsTo(User)
 
 
 sequelize.sync()

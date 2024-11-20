@@ -1,0 +1,64 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.navbar {
+    margin:3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #ddd;
+}
+
+.navbar-brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.nav-items {
+    display: inline-flex;
+    gap: 20px;
+
+}
+
+.nav-items a {
+    text-decoration: none;
+    font-size: 18px;
+    padding: 10px 10px;
+    border-radius: 5px;
+
+
+}
+
+.nav-items a:hover {
+    background-color: #e9ecef;
+}
+
+
+.charity-container{
+    text-align: center;
+   width:500px;
+   margin:2px auto;
+   padding:10px;
+   border-bottom: 1px solid rgb(135, 38, 38);
+
+   
+    
+    
+}
+#charityForm input,label{
+    margin:5px auto;
+    padding:2px;
+    
+    
+}
+
