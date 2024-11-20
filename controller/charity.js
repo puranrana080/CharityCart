@@ -1,9 +1,7 @@
 const Charity=require('../model/charity')
 const path=require('path')
 
-// exports.getCharityForm=async(req,res,next)=>{
-//     res.sendFile(path.join(__dirname,'../public/views/new-charity.html'))
-// }
+
 console.log("Reached in controller")
 exports.postCreateCharity=async(req,res,next)=>{
     try{
@@ -49,6 +47,25 @@ res.status(200).json({message:"Got mycharity",myCharity})
     catch(error){
         console.log("server",error)
         res.status(500).json({message:"server error",error})
+    }
+
+}
+
+
+exports.getCharityById=async(req,res,next)=>{
+   
+    const {charityId}=req.params
+    console.log("THIS ISSSS",charityId)
+    try{
+
+        const charity=await Charity.findByPk(charityId)
+
+        res.status(200).json({message:"charity with user found",charity})
+
+    }
+    catch(err){
+        console.log("ERR in server by id")
+        res.status(500).json({message:"charity not found wwith id",err})
     }
 
 }

@@ -11,4 +11,6 @@ router.get('/cherities',userAuthentication.authenticate,charityController.getAll
 
 router.get('/charity/my-charity',userAuthentication.authenticate,charityController.getMyCampaigns)
 
+router.get('/charity/:charityId/profile',userAuthentication.authenticate,charityController.getCharityById)
+
 module.exports= router  

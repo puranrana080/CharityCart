@@ -8,6 +8,7 @@ const sequelize=require('./util/database')
 
 const User=require('./model/user')
 const Charity = require('./model/charity')
+const Donation = require('./model/donation')
 
 
 // Middleware to parse incoming JSON requests and URL-encoded form data
@@ -32,6 +33,12 @@ app.use(charityRoutes)
 
 User.hasMany(Charity)
 Charity.belongsTo(User)
+
+User.hasMany(Donation)
+Donation.belongsTo(User)
+
+Charity.hasMany(Donation)
+Donation.belongsTo(Charity)
 
 
 sequelize.sync()

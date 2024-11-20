@@ -23,12 +23,27 @@ window.addEventListener('DOMContentLoaded',()=>{
 
 function displayAllCharities(charity){
 
-    const list =document.getElementById('listofcharities')
+    const list =document.querySelector('.box-container')
 
-    const newCharity=document.createElement('li')
-    newCharity.textContent=`Name: ${charity.name}  Description: ${charity.description}`
 
-    list.appendChild(newCharity)
+    const col=document.createElement('div')
+    col.innerHTML=`<div class="card" style="width: 18rem;">
+            <img src="/images/cardimg.avif" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">${charity.name}</h5>
+              <p class="card-text">${charity.description}</p>
+              <a  class="btn btn-primary donate-btn">Donate</a>
+            </div>
+          </div>`
+    list.appendChild(col)
+
+    col.querySelector('.donate-btn').addEventListener('click',()=>{    
+            window.location.href = `/views/charity-profile.html?charityId=${charity.id}`
+    })
+
 
 }
+
+
+
 
