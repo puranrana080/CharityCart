@@ -21,6 +21,12 @@ const User = sequelize.define('users', {
         type: Sequelize.STRING,
         allowNull: false,
     },
+    role:{
+        type:Sequelize.STRING,
+        defaultValue:'user',
+        allowNull:false
+
+    },
     total_donation:{
         type:Sequelize.INTEGER,
         defaultValue:0

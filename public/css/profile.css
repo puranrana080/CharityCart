@@ -133,6 +133,11 @@ body {
     padding:3px 10px;
    
 }
+.top-right{display:flex;
+    border-left: 1px solid black;
+    gap:5px;
+    padding-left: 3px;
+}
 
 
 

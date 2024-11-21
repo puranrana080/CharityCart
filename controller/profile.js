@@ -13,7 +13,16 @@ exports.getUserProfilePage=async (req,res,next)=>{
 exports.getUserProfileDetails=async(req,res,next)=>{
     try{
         console.log("In server checking for user details ")
+        //making the first user admin
+        const userCount=await User.count() 
+        if(userCount===1){
+            const oneUser=await User.findOne()
+            oneUser.update({role:'Admin'})
+            console.log("Admin created")
+        }
+        
         const user= await User.findByPk(req.user.id)
+
         console.log("user detail",user)
         res.status(200).json({message:"detail fetched",user})
 

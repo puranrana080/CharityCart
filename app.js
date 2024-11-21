@@ -22,6 +22,7 @@ app.use(cors({
 const userRoutes=require('./routes/user')
 const profileRoutes=require('./routes/profile')
 const charityRoutes=require('./routes/charity')
+const adminRoutes=require('./routes/admin')
 
 //server static files from public folder
 app.use(express.static(path.join(__dirname,'public')))
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname,'public')))
 app.use(userRoutes)
 app.use(profileRoutes)
 app.use(charityRoutes)
+app.use(adminRoutes)
 
 
 User.hasMany(Charity)

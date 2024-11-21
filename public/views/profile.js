@@ -14,6 +14,17 @@ function getUserProfileDetails() {
 
             document.getElementById('donated').textContent = `$${user.total_donation}`
             document.getElementById('joined').textContent = `${user.campaignSupported}`
+
+            const adminbutton=document.querySelector('.top-right a')
+
+            if(user.role==='Admin'){
+                adminbutton.textContent='Admin Dashboard'
+            }
+            else{
+                adminbutton.style.display = 'none';
+                adminbutton.textContent=''
+
+            }
         })
         .catch(error => {
             console.log("Interserver error in getting user details")
@@ -21,13 +32,11 @@ function getUserProfileDetails() {
 
 }
 
-
-
-
 window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem('token')
     if (!token) {
         console.log("Token not found")
+        alert("Token not Found, login First")
         return
     }
     getUserProfileDetails()
@@ -79,10 +88,11 @@ function displayUserDonationList(donation,sno) {
     `
     tbody.appendChild(tRow)
 
-
-
-
 }
+
+
+
+
 
 
 

@@ -25,6 +25,7 @@ function displayMyCharity(charity) {
               <h5 class="card-title">${charity.name}</h5>
               <p class="card-text">${charity.description.split(' ').slice(0, 10).join(' ')}</p>
               <a  class="btn btn-primary donate-btn">Donate</a>
+              <a  style="pointer-events: none" class="btn btn-info">${charity.isApproved ? "Approved" : "Not Approved yet"}</a>
             </div>
           </div>`
 
