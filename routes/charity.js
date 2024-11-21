@@ -17,4 +17,6 @@ router.post('/charity/:charityId/donate',userAuthentication.authenticate,charity
 
 router.post('/charity/donate/updateDonationStatus',userAuthentication.authenticate,charityController.updateDonationStatus)
 
+router.post('/charity/donate/failedDonationStatus',userAuthentication.authenticate,charityController.updateDonationToFailed)
+
 module.exports= router  

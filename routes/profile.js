@@ -9,5 +9,6 @@ router.get('/profile/userDetails',userAuthentication.authenticate,profileControl
 
 router.post('/profile/editProfile',userAuthentication.authenticate,profileController.postUpdateProfile)
 
+router.get('/profile/getMyDonations',userAuthentication.authenticate,profileController.getMyDonationDetails)
 
 module.exports = router

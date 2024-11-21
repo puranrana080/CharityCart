@@ -31,7 +31,7 @@ function displayAllCharities(charity){
             <img src="/images/cardimg.avif" class="card-img-top" alt="...">
             <div class="card-body">
               <h5 class="card-title">${charity.name}</h5>
-              <p class="card-text">${charity.description}</p>
+              <p class="card-text">${charity.description.split(' ').slice(0, 10).join(' ')}</p>
               <a  class="btn btn-primary donate-btn">Donate</a>
             </div>
           </div>`

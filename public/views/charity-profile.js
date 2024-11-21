@@ -60,20 +60,20 @@ form.addEventListener('submit', async (event) => {
         const rzp1 = new Razorpay(options)
         rzp1.open()
 
-        // rzp1.on('payment-failed',async function(response){
-        //     console.log("Payment Failed",response)
-        //     try{
+        rzp1.on('payment-failed',async function(response){
+            console.log("Payment Failed",response)
+            try{
 
-        //         await axios.post('http://localhost:3000/charity/donate/failedDonationStatus',
-        //             {    order_id:options.order_id,
-        //         },{headers:{"Authorization":token}}
-        //     )
-        //     alert("Payment Failed! Something went wrong")
-        // }
-        //     catch(error){
-        //         console.error("Failed to log failed payment:", error);
-        //     }
-        // })
+                await axios.post('http://localhost:3000/charity/donate/failedDonationStatus',
+                    {    order_id:options.order_id,
+                },{headers:{"Authorization":token}}
+            )
+            alert("Payment Failed! Something went wrong")
+        }
+            catch(error){
+                console.error("Failed to log failed payment:", error);
+            }
+        })
     }
     catch (error) {
         console.log("Failed, error--", error)

@@ -1,5 +1,7 @@
 const path=require('path')
 const User= require('../model/user')
+const Donation =require('../model/donation')
+const Charity = require('../model/charity')
 
 exports.getUserProfilePage=async (req,res,next)=>{
     res.sendFile(path.join(__dirname,'../public/views/profile.html'))
@@ -43,7 +45,24 @@ exports.postUpdateProfile=async(req,res,next)=>{
         res.status(500).json({ message: "error while updating the profile", error })
 
     }
+}
 
+exports.getMyDonationDetails=async(req,res,next)=>{
+    try{
 
+        const donations=await Donation.findAll({
+            where:{userId:req.user.id,status:'SUCCESS'},
+            include:[{model:Charity,attributes:['name','category']}]
+        })
+        
+        console.log("This i my donation",donations)
+
+        res.status(201).json({message:"My donation details",donations})
+
+    }
+    catch(error){
+        console.log("Error in fetching user donation from db",error)
+        res.status(500).json({message:"donation details not fetched",error})
+    }
 
 }

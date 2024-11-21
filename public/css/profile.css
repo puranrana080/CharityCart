@@ -112,17 +112,30 @@ body {
     display: flex;
     justify-content: space-around;
     margin:20px auto;
-    /* border:1px solid #e9ecef; */
-    width:70%
+    border-bottom:1px solid #e9ecef;
+    width:80%
 
     
 }
 #my-donations{
     display: flex;
+    flex-direction: column;
+    gap:20px;
     justify-content: center;
     align-items: center;
     font-size: 25px
 }
+#my-donations h1{
+    color:rgb(111, 243, 16);
+    font-family: sans-serif;
+    border:2px solid black;
+    border-radius: 5px;
+    padding:3px 10px;
+   
+}
+
+
+
 
 /* all-charity.html */
 
