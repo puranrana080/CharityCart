@@ -1,8 +1,9 @@
 const Charity = require('../model/charity')
 const User = require('../model/user')
-const path = require('path')
+const Sib = require('sib-api-v3-sdk')
 const RazorPay = require('razorpay')
 const Donation = require('../model/donation')
+require('dotenv').config()
 
 
 console.log("Reached in controller")
@@ -112,19 +113,54 @@ exports.updateDonationStatus = async (req, res, next) => {
         const donation = await Donation.findOne({ where: { orderId: order_id } })
         const user = await User.findByPk(donation.userId)
 
+        const charity = await Charity.findByPk(donation.charityId)
+
         const newTotal = donation.amount + user.total_donation
 
 
         const promise1 = donation.update({ paymentid: payment_id, status: "SUCCESS" })
         const promise2 = user.update({ total_donation: newTotal, campaignSupported: user.campaignSupported + 1 })
 
-        Promise.all([promise1, promise2])
-            .then(() => {
-                return res.status(202).json({ message: "Donation Successful" })
-            })
-            .catch(err => {
-                throw new Error(err)
-            })
+        await Promise.all([promise1, promise2])
+        // .then(() => {
+        //     res.status(202).json({ message: "Donation Successful" })
+        // })
+        // .catch(err => {
+        //     throw new Error(err)
+        // })
+        ////sending confirmation mail
+        if (!process.env.API_KEY) {
+            throw new Error('API_KEY is not set in environment variables');
+        }
+        const client = Sib.ApiClient.instance
+        const apiKey = client.authentications['api-key']
+        apiKey.apiKey = process.env.API_KEY
+
+        const tranEmailApi = new Sib.TransactionalEmailsApi()
+        const sender = {
+            email: 'puransinghrana080@gmail.com',
+            name: 'puran'
+        }
+        const receivers = [{ email: user.userEmail }]
+
+        const response = await tranEmailApi.sendTransacEmail({
+            sender,
+            to: receivers,
+            subject: 'Confirmation Email of Donation',
+            textContent: `
+            Dear ${user.userName},
+
+            Thank you for your donation to ${charity.name}!
+            Here are the details of your donation:
+            - Donation Amount: ${donation.amount}
+            - Charity: ${charity.name}
+            - Date: ${donation.date}
+
+            Once again, thank you for your donation!
+            `
+        })
+        console.log("Donation successful Email sent successfully:", response);
+        res.status(200).json({ message: "donation updated and condirmation mail sent" });
     }
     catch (error) {
         console.log("Error in updating donation status", error)
@@ -145,7 +181,7 @@ exports.updateDonationToFailed = async (req, res, next) => {
     catch (error) {
         console.log("Error in updating", error)
         return res.status(500).json({
-            message: "Failed to update transaction status",error
+            message: "Failed to update transaction status", error
         })
     }
 
