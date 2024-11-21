@@ -9,7 +9,10 @@ const Donation = sequelize.define('donation',{
     date:{
         type:Sequelize.DATE,
         defaultValue:Sequelize.NOW
-    }
+    },
+    paymentid:Sequelize.STRING,
+    orderid:Sequelize.STRING,
+    status:Sequelize.STRING
 })
 
 module.exports=Donation

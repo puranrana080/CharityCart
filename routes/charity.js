@@ -13,4 +13,8 @@ router.get('/charity/my-charity',userAuthentication.authenticate,charityControll
 
 router.get('/charity/:charityId/profile',userAuthentication.authenticate,charityController.getCharityById)
 
+router.post('/charity/:charityId/donate',userAuthentication.authenticate,charityController.donateToCharity)
+
+router.post('/charity/donate/updateDonationStatus',userAuthentication.authenticate,charityController.updateDonationStatus)
+
 module.exports= router  

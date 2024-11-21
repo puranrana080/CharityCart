@@ -1,5 +1,8 @@
 const Charity=require('../model/charity')
+const User=require('../model/user')
 const path=require('path')
+const RazorPay=require('razorpay')
+const Donation=require('../model/donation')
 
 
 console.log("Reached in controller")
@@ -67,5 +70,66 @@ exports.getCharityById=async(req,res,next)=>{
         console.log("ERR in server by id")
         res.status(500).json({message:"charity not found wwith id",err})
     }
+
+}
+
+
+exports.donateToCharity=async(req,res,next)=>{
+    const charityId=req.params.charityId
+    const {amount}=req.body
+    console.log("AAAAA",amount)
+try{
+    var rzp = new RazorPay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET
+    })
+    rzp.orders.create({amount:amount*100,currency:'INR'},(err,order)=>{
+        if(err) {throw new Error(err)}
+        req.user.createDonation({
+            orderid:order.id,
+            status:"PENDING",
+            charityId:charityId,
+            amount:amount
+        })
+        .then(()=>{
+            return res.status(201).json({order,key_id:rzp.key_id})
+        })
+        .catch(err=>{
+            throw new Error(err)
+        })
+    })
+}
+catch (err) {
+    console.log(err)
+    res.status(403).json({ message: "something wrong in creating rzp order", error: err })
+}
+}
+
+exports.updateDonationStatus=async(req,res,next)=>{
+    const {order_id,payment_id}=req.body
+    try{
+
+    const donation = await Donation.findOne({where:{orderId:order_id}})
+    const user = await  User.findByPk(donation.userId)
+
+    const newTotal=donation.amount+user.total_donation
+
+
+    const promise1=donation.update({paymentid:payment_id,status:"SUCCESS"})
+    const promise2=user.update({total_donation:newTotal,campaignSupported:user.campaignSupported+1})
+
+    Promise.all([promise1,promise2])
+    .then(()=>{
+        return res.status(202).json({ message: "Donation Successful" })
+    })
+    .catch(err=>{
+        throw new Error(err)
+    })
+}
+catch(error){
+    console.log("Error in updating donation status",error)
+    res.status(500).json({message:"Donation Failed to update",error})
+
+}
 
 }

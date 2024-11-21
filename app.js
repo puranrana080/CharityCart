@@ -4,6 +4,7 @@ const bodyParser=require('body-parser')
 const app= express()
 const cors=require('cors')
 const sequelize=require('./util/database')
+require('dotenv').config()
 
 
 const User=require('./model/user')
