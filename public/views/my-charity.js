@@ -19,12 +19,14 @@ function displayMyCharity(charity) {
     const list = document.getElementById('mycharity-container')
 
     const col = document.createElement('div')
-    col.innerHTML = `<div class="card" style="width: 18rem;">
-            <img src="/images/cardimg.avif" class="card-img-top" alt="...">
+    col.innerHTML = `<div class="card " style="width: 18rem;">
+            <img src="/images/cardimg.avif" class="card-img-top donate-btn" alt="...">
             <div class="card-body">
               <h5 class="card-title">${charity.name}</h5>
               <p class="card-text">${charity.description.split(' ').slice(0, 10).join(' ')}</p>
-              <a  class="btn btn-primary donate-btn">Donate</a>
+
+           <a  style="pointer-events: none"  class="btn btn-primary donate-btn">Donate</a>
+              
               <a  style="pointer-events: none" class="btn btn-info">${charity.isApproved ? "Approved" : "Not Approved yet"}</a>
             </div>
           </div>`

@@ -15,14 +15,14 @@ function getUserProfileDetails() {
             document.getElementById('donated').textContent = `$${user.total_donation}`
             document.getElementById('joined').textContent = `${user.campaignSupported}`
 
-            const adminbutton=document.querySelector('.top-right a')
+            const adminbutton = document.querySelector('.top-right a')
 
-            if(user.role==='Admin'){
-                adminbutton.textContent='Admin Dashboard'
+            if (user.role === 'Admin') {
+                adminbutton.textContent = 'Admin Dashboard'
             }
-            else{
+            else {
                 adminbutton.style.display = 'none';
-                adminbutton.textContent=''
+                adminbutton.textContent = ''
 
             }
         })
@@ -36,7 +36,10 @@ window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem('token')
     if (!token) {
         console.log("Token not found")
+
         alert("Token not Found, login First")
+
+
         return
     }
     getUserProfileDetails()
@@ -53,17 +56,18 @@ function getUserDonationList() {
             console.log("Donation List", response.data.donations)
 
             const donations = response.data.donations
-            if(donations.length<1){
-                document.querySelector('.table').textContent="No donation done yet"
+            if (donations.length < 1) {
+                document.querySelector('.table').textContent = "No donation done yet"
 
             }
-            else{
-            let sno=1
-            donations.forEach(donation => {
-                displayUserDonationList(donation,sno)
-                sno++
-            })
-        }
+            else {
+
+                let sno = 1
+                donations.forEach(donation => {
+                    displayUserDonationList(donation, sno)
+                    sno++
+                })
+            }
         })
         .catch(error => {
             console.log("error in server fetching donation", error)
@@ -72,7 +76,7 @@ function getUserDonationList() {
 
 }
 
-function displayUserDonationList(donation,sno) {
+function displayUserDonationList(donation, sno) {
 
     const tbody = document.querySelector('.tbody')
 
@@ -84,12 +88,41 @@ function displayUserDonationList(donation,sno) {
                         <td>${donation.amount}</td>
                         <td>${donation.status}</td>
                         <td>${donation.date.split("T")[0]}</td>
+                        <td> <button class="btn btn-primary btn-sm download-receipt">Download</button>  </td>
+
     
     `
     tbody.appendChild(tRow)
+    const donwloadBtn = tRow.querySelector('.download-receipt')
+    donwloadBtn.addEventListener('click', () => {
+        downloadDonationDetails(donation)
+    })
 
 }
 
+function downloadDonationDetails(donation) {
+    const data = `
+
+    Thank You for your Donation
+    Charity Name= ${donation.charity.name}
+    Amount:${donation.amount}
+    Status:${donation.status}
+    Date:${donation.date}
+`
+    //creating blob object
+    const blob = new Blob([data], { type: 'text/plain' })
+
+    const link = document.createElement('a')
+    link.href = URL.createObjectURL(blob)
+    link.download = `donation-${donation.charity.name}-${donation.date}.txt`
+
+    link.click()
+
+    URL.revokeObjectURL(link.href)
+
+
+
+}
 
 
 

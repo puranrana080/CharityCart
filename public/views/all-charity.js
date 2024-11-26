@@ -1,5 +1,16 @@
 
 
+
+const token=localStorage.getItem('token')
+
+if(!token){
+const add=document.querySelector('.nav-items')
+    const sub=document.createElement('a')
+    sub.textContent="login"
+    sub.setAttribute("href","../views/login.html")
+    add.appendChild(sub)
+}
+
 window.addEventListener('DOMContentLoaded', () => {
     const token = localStorage.getItem('token')
 
