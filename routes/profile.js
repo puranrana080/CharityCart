@@ -1,14 +1,26 @@
-const express = require('express')
-const router = express.Router()
-const profileController = require('../controller/profile')
-const userAuthentication = require('../middleware/auth')
+const express = require("express");
+const router = express.Router();
+const profileController = require("../controller/profile");
+const userAuthentication = require("../middleware/auth");
 
-router.get('/profile',profileController.getUserProfilePage)
+router.get("/profile", profileController.getUserProfilePage);
 
-router.get('/profile/userDetails',userAuthentication.authenticate,profileController.getUserProfileDetails)
+router.get(
+  "/profile/userDetails",
+  userAuthentication.authenticate,
+  profileController.getUserProfileDetails
+);
 
-router.post('/profile/editProfile',userAuthentication.authenticate,profileController.postUpdateProfile)
+router.post(
+  "/profile/editProfile",
+  userAuthentication.authenticate,
+  profileController.postUpdateProfile
+);
 
-router.get('/profile/getMyDonations',userAuthentication.authenticate,profileController.getMyDonationDetails)
+router.get(
+  "/profile/getMyDonations",
+  userAuthentication.authenticate,
+  profileController.getMyDonationDetails
+);
 
-module.exports = router
+module.exports = router;

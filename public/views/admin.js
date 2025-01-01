@@ -1,4 +1,4 @@
-const token =localStorage.getItem('token')
+const token=localStorage.getItem('token')
 
 console.log("tooooooooooo",token)
 if (!token) {
@@ -9,7 +9,7 @@ if (!token) {
 
 
 window.addEventListener("DOMContentLoaded",()=>{
-
+    const token =localStorage.getItem('token')
 
    
 
@@ -75,11 +75,13 @@ window.addEventListener("DOMContentLoaded",()=>{
 
 
 function promoteUser(id){
+    const token=localStorage.getItem('token')
    
    axios.post(`http://localhost:3000/admin/promoteUser/${id}`,{headers:{"Authorization":token}})
    .then((response)=>{
     console.log(response)
     alert("User Promoted to Admin")
+    window.location.reload()
    })
    .catch(err=>{
     console.log(err)
@@ -87,11 +89,13 @@ function promoteUser(id){
 }
 
 function approveCharity(id){
+    const token=localStorage.getItem('token')
     console.log("sdfjksbfkjskfhs",token)
     axios.post(`http://localhost:3000/admin/approveCharity/${id}`,{headers:{"Authorization":token}})
 .then((response)=>{
     console.log(response)
     alert("Charity Approved")
+    window.location.reload()
 })
 .catch(err=>{
     console.log(err)
@@ -102,6 +106,7 @@ function rejectCharity(id){
     .then((response)=>{
         console.log(response)
         alert("Charity rejected")
+        window.location.reload()
     })
     .catch(err=>{
         console.log(err)

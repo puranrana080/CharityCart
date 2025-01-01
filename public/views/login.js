@@ -13,6 +13,16 @@ function loginUser(event){
     })
     .catch(error=>{
         console.log("error while logging in server",error)
-        alert("Not logged in , try again")
+        // alert("Not logged in ,session expired, try again")
+        if (error.response && error.response.data) {
+            if (error.response.data.message === "jwt expired") {
+                alert("Session expired. Please log in again");
+                window.location.href = "views/login";
+            } else {
+                alert("An error occurred: " + error.response.data.message);
+            }
+        } else {
+            alert("Not logged in, try again.");
+        }
     })
 }
