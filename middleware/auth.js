@@ -5,6 +5,7 @@ require("dotenv").config();
 const authenticate = async (req, res, next) => {
   try {
     const token = req.header("Authorization");
+    if(!token) return res.status(401).json({ message: 'No token provided' });
     console.log("This is token", token);
     console.log("Authorizing the user");
 
@@ -21,9 +22,11 @@ const authenticate = async (req, res, next) => {
   } catch (error) {
     if(error.name==='TokenExpiredError'){
     console.error("Token has expired.")
+    return res.status(401).json({ message: "Token expired, please login again" });
     }
 
     console.log("jwt error", error);
+    return res.status(401).json({ message: "Invalid token" })
   }
 };
 
